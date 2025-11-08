@@ -7,7 +7,7 @@ import Userpic from '../../assets/user.png';
 import User from '../../../API/REST/User.js';
 import storage from '../../../API/storage.js';
 import LoginModal from '../modal/LoginModal.svelte'
-    import Gallery from "../../../API/REST/Gallery";
+import Gallery from "../../../API/REST/Gallery";
 
     let showLogin = $state(false);
     let profilePic = $state(Userpic);
@@ -47,7 +47,7 @@ import LoginModal from '../modal/LoginModal.svelte'
     <div class="header-buttons">
       <HeaderButton Url="MaskinPakken">MaskinPakken</HeaderButton>
       <HeaderButton Url="services">Services</HeaderButton>
-      <HeaderButton Url="contact">Contact</HeaderButton>
+      <HeaderButton Url="TheTeam">Holdet</HeaderButton>
     </div>
     <div class="nav-actions">
       {#if LoggedIn}

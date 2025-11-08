@@ -7,21 +7,9 @@
   import Row from '$lib/compontnets/RowSet/CompRow.svelte';
   import RowCard from '$lib/compontnets/RowSet/RowCard.svelte';
   import Gallery from "../../API/REST/Gallery.js"
-  import Brand from '../../API/REST/Brand.js';
-  let Brands = [];
-  let Tractors = [];
-  let Foragers = [];
-  let BrandIDMap = {};
-  
+    import Brand from '../../API/REST/Brand.js';
+
   onMount(async () => {
-    Brands = await BrandAPI.GetAll();
-    Tractors = await MachineAPI.GetByTags(["91592724-05a1-4299-7d9d-08de1b91bb86"])
-    BrandIDMap = {};
-    for (const brand of Brands) {
-      BrandIDMap[brand.brandID] = {Logo: Gallery.ShowImage(brand.imageID),
-        brandName: brand.brandName
-      };
-    }
   });
   function addBrand(Data){
     Data.Brand = BrandIDMap[Data.brandID]

@@ -15,7 +15,7 @@
 	:global(body) {
 		margin: 0;
 		height: 100%;
-		background-image: url(https://localhost:7006/api/Gallery/GetProfilPic?ImageID=5c092000-9564-4636-2357-08de1b90c6b6);
+		background-image: url(https://localhost:7006/api/Gallery/GetProfilPic?ImageID=96094777-6f47-479e-6789-08de1d64d96f);
 		background-size: cover;
 		background-position: center;
 		background-attachment: fixed; 

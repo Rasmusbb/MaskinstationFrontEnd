@@ -16,6 +16,16 @@ async function Login(Login) {
   return Data;
 }
 
+export async function GetByID (UserID) {
+  let Data = await fetch(API + '/GetByID?UserID=' + UserID,{
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json'
+    }
+  }).then(res => res.json());
+  return Data;
+}
+
 async function LoginByRefreshToken(Token) {
   let Data = await fetch(API + '/Login', {
     method: 'POST',
@@ -31,5 +41,6 @@ async function LoginByRefreshToken(Token) {
 
 export default {
     Login:  Login,
+    GetByID: GetByID,
     LoginByRefreshToken: LoginByRefreshToken
 };
