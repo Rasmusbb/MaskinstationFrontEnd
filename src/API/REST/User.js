@@ -16,6 +16,18 @@ async function Login(Login) {
   return Data;
 }
 
+export async function GetAll(Type) {
+  console.log("Fetching Users from: " + API + '/GetAll')
+  let Data = await fetch(API + '/GetAll' + "?type=" + Type,{
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json'
+    }
+  }).then(res => res.json());
+  return Data;
+}
+
+
 export async function GetByID (UserID) {
   let Data = await fetch(API + '/GetByID?UserID=' + UserID,{
     method: 'GET',
@@ -42,5 +54,6 @@ async function LoginByRefreshToken(Token) {
 export default {
     Login:  Login,
     GetByID: GetByID,
+    GetAll: GetAll,
     LoginByRefreshToken: LoginByRefreshToken
 };

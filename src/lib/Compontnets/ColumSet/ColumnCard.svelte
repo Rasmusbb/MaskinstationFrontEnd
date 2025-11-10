@@ -7,8 +7,10 @@
 <a href="/MaskinPakken/{Data.machineID}" class="columncard">
     <img src={Gallery.GetFirstImage(Data.galleryID)} alt="{Data.model}" class="columncard-mainimg">
     <div class="columncard-info">
-        <img src={Data.Brand.Logo} alt={Data.Brand.brandName} class="columncard-Smallimg ">
-        <h3>{Data.Brand.brandName + " " + Data.model}</h3>
+        {#if Data.Brand}
+            <img src={Data.Brand.Logo} alt={Data.Brand.brandName} class="columncard-Smallimg ">
+            <h3>{Data.Brand.brandName + " " + Data.model}</h3>
+        {/if}
     </div>
 </a>
 

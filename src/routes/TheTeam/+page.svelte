@@ -1,42 +1,27 @@
 <script>
-  import BrandAPI from '../../API/REST/Brand.js';
-  import MachineAPI from '../../API/REST/Machine.js';
   import { onMount } from 'svelte';
-  import MachineColumn from '$lib/compontnets/columSet/CompColumn.svelte';
+  import Column from '$lib/compontnets/columSet/CompColumn.svelte';
   import ColumCard from '$lib/compontnets/columSet/ColumnCard.svelte';
-  import Row from '$lib/compontnets/RowSet/CompRow.svelte';
-  import RowCard from '$lib/compontnets/RowSet/RowCard.svelte';
+  import User from '../../API/REST/User.js';
   import Gallery from "../../API/REST/Gallery.js"
-    import Brand from '../../API/REST/Brand.js';
-
+  let users = []; 
   onMount(async () => {
+    users = await User.GetAll();
+    for (let user of users) {
+      user.ProfilPic = 
+    }
   });
-  function addBrand(Data){
-    Data.Brand = BrandIDMap[Data.brandID]
-    return Data
-  }
 </script>
 
 <div class="page-wrapper">
-  <h1 style="color: white; font-family: cursive;">MaskinPakken</h1>
+  <h1 style="color: white; font-family: cursive;">Holdet</h1>
 
-  <Row>
-  {#each Object.values(BrandIDMap) as Brand}
-    <RowCard Data={Brand} />
-  {/each}
-  </Row>
-
-  <div class="MachineColumn">
-    <MachineColumn ColumnTitle="Traktorer">
-      {#each Tractors as Tractor}
-        <ColumCard Prefix="Machines/" Data={addBrand(Tractor)}/>
+  <div class="Column">
+    <Column ColumnTitle="The Team">
+      {#each users as user}
+        <ColumCard Prefix="TheTeam/" Data={user} />
       {/each}
-    </MachineColumn>
-    <MachineColumn ColumnTitle="Snittere">
-      {#each Foragers as Forager}
-        <ColumCard Prefix="Machines/" Data={Forager} />
-      {/each}
-    </MachineColumn>
+    </Column>
   </div>
 </div>
 
@@ -52,7 +37,7 @@
     padding: 2rem;
   }
 
-  .MachineColumn {
+  .Column {
     margin-right: 2rem;
     display: flex;
   }

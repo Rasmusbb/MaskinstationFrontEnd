@@ -15,11 +15,11 @@
 	:global(body) {
 		margin: 0;
 		height: 100%;
-		background-image: url(https://localhost:7006/api/Gallery/GetProfilPic?ImageID=96094777-6f47-479e-6789-08de1d64d96f);
+		background-image: url(https://localhost:7006/api/Gallery/GetProfilPic?ImageID=19ad142b-5d3a-4ff0-a5e2-08de1ecacf0a);
 		background-size: cover;
 		background-position: center;
 		background-attachment: fixed; 
 		background-repeat: no-repeat;
-		overflow-x: hidden; /* Prevent horizontal scroll */
+		overflow-x: hidden; 
   }
 </style>
