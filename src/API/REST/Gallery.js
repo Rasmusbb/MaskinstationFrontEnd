@@ -1,6 +1,5 @@
-import { GetByID } from "./Brand";
 
-const API = import.meta.env.VITE_API_URL + 'Gallery'
+const API = import.meta.env.VITE_API_URL + '/Gallery'
 
 export function ShowImage (ImageID) {
   let Data = API + '/GetProfilPic?ImageID=' + ImageID
@@ -27,10 +26,16 @@ export function GetFirstImage (GalleryID){
     return Data
 }
 
+export function GetFirstImageByTag (GalleryID, Tag){
+    let Data = API + '/GetFirstPicByTag?GalleryID=' + GalleryID + '&TagName=' + Tag
+    return Data
+}
+
 export default {
     ShowImage: ShowImage,
     ShowVideo: ShowVideo,
     GetGalleryByID: GetGalleryByID,
+    GetFirstImageByTag: GetFirstImageByTag,
     GetFirstImage: GetFirstImage
 };
 

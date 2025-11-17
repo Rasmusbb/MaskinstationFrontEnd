@@ -1,17 +1,11 @@
 <script>
     export let Data;
-    import Gallery from "../../../API/REST/Gallery";
-
+    import ColumnInfo from "./ColumnInfo.svelte";
+    console.log(Data);
 </script>
 
-<a href="/MaskinPakken/{Data.machineID}" class="columncard">
-    <img src={Gallery.GetFirstImage(Data.galleryID)} alt="{Data.model}" class="columncard-mainimg">
-    <div class="columncard-info">
-        {#if Data.Brand}
-            <img src={Data.Brand.Logo} alt={Data.Brand.brandName} class="columncard-Smallimg ">
-            <h3>{Data.Brand.brandName + " " + Data.model}</h3>
-        {/if}
-    </div>
+<a href="/{Data.prefix}/{Data.machineID}" class="columncard">
+    <ColumnInfo {Data} />
 </a>
 
 <style>
@@ -33,20 +27,10 @@
     animation: pop-in 1s cubic-bezier(.2,.7,.2,1) both;
 }
 
-.columncard-mainimg {
-    width: 40%; 
-    height: auto; 
-    object-fit: cover;  
-    border-radius: 12px;
-    transform: translateY(0) scale(1);
-}
 .columncard:hover {
     cursor: pointer;
-    transform: translateY(-5px) scale(1.05); /* moves up a bit and slightly scales */
-    filter: drop-shadow(0 14px 20px rgba(0,0,0,.18)); /* optional, to make it pop more */
+    transform: translateY(-5px) scale(1.05); 
+    filter: drop-shadow(0 14px 20px rgba(0,0,0,.18)); 
 }
-.columncard-Smallimg {
-    width: 2rem;
-    height: 2rem;
-}
+
 </style>

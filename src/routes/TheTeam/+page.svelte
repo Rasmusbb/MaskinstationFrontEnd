@@ -4,11 +4,14 @@
   import ColumCard from '$lib/compontnets/columSet/ColumnCard.svelte';
   import User from '../../API/REST/User.js';
   import Gallery from "../../API/REST/Gallery.js"
+  import GalleryBox from '$lib/Compontnets/Gallery/GalleryBox.svelte';
   let users = []; 
   onMount(async () => {
     users = await User.GetAll();
     for (let user of users) {
-      user.ProfilPic = 
+      user.ProfilPic = Gallery.GetFirstImageByTag(user.GalleryID, "ProfilPic");
+      user.ProfilDefault = Gallery.GetFirstImageByTag("4c67681d-d914-467c-8f9e-52e9181baeb6","profilpicture")
+      user.prefix = "TheTeam"
     }
   });
 </script>
@@ -19,7 +22,7 @@
   <div class="Column">
     <Column ColumnTitle="The Team">
       {#each users as user}
-        <ColumCard Prefix="TheTeam/" Data={user} />
+        <ColumCard Data={user} />
       {/each}
     </Column>
   </div>

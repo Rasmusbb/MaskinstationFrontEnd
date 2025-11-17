@@ -4,7 +4,7 @@
     import MachineAPI from '$lib/../API/REST/Machine.js';
     import Gallery, { ShowImage } from '../../../API/REST/Gallery.js';
     import GalleryBox from '$lib/Compontnets/Gallery/GalleryBox.svelte';
-    import InfoBox from '$lib/Compontnets/InfoBox.svelte';
+    import InfoBox from '$lib/Compontnets/Boxs/InfoBox.svelte';
     import Brand from '../../../API/REST/Brand';
     import User from '../../../API/REST/User.js'
     import { text } from '@sveltejs/kit';

@@ -1,6 +1,6 @@
 
 <script>
-    import Gallery from '../../API/REST/Gallery.js';
+    import Gallery from '../../../API/REST/Gallery.js';
     export let Data;
 
 </script>

@@ -14,7 +14,7 @@ import Gallery from "../../../API/REST/Gallery";
     let username = $state('');
     let password = $state('');
     let LoggedIn = $state(false);
-
+    let Admin = $state(false);
     function toggleLogin() {
         showLogin = !showLogin;
     }
@@ -24,11 +24,15 @@ import Gallery from "../../../API/REST/Gallery";
       window.location.href = '/'; 
     }
     function checkToken(){
-       let Token = storage.DecodeToken("accessToken")
+      let Token = storage.DecodeToken("accessToken")
+      console.log(Token);
         if (Token != null){
           LoggedIn = true
           if(Token.ProfilPic != "00000000-0000-0000-0000-000000000000"){
             profilePic = Gallery.ShowImage(Token.ProfilPic)
+          }
+          if (Token["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] === "Admin") {
+              Admin = true;
           }
           showLogin = false
         }
@@ -48,6 +52,11 @@ import Gallery from "../../../API/REST/Gallery";
       <HeaderButton Url="MaskinPakken">MaskinPakken</HeaderButton>
       <HeaderButton Url="services">Services</HeaderButton>
       <HeaderButton Url="TheTeam">Holdet</HeaderButton>
+      <HeaderButton Url="AboutUs">Om Os</HeaderButton>
+      {#if Admin}
+        <HeaderButton Url="Admin">Admin Panel</HeaderButton>
+      {/if}
+
     </div>
     <div class="nav-actions">
       {#if LoggedIn}

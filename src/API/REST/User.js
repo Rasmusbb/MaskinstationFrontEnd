@@ -1,7 +1,7 @@
 
 import Header from "$lib/Compontnets/header/Header.svelte";
 import storage from "../storage";
-const API = import.meta.env.VITE_API_URL + 'User'
+const API = import.meta.env.VITE_API_URL + '/User'
 
 async function Login(Login) {
   let Data = await fetch(API + '/Login', {
@@ -18,7 +18,7 @@ async function Login(Login) {
 
 export async function GetAll(Type) {
   console.log("Fetching Users from: " + API + '/GetAll')
-  let Data = await fetch(API + '/GetAll' + "?type=" + Type,{
+  let Data = await fetch(API + '/GetAll',{
     method: 'GET',
     headers: {
         'Content-Type': 'application/json'
