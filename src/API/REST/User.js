@@ -51,8 +51,27 @@ async function LoginByRefreshToken(Token) {
   return Data;
 }
 
+async function Create(UserData) {
+    console.log(UserData)
+    console.log(API + '/Create');
+    const res = await fetch(API + '/Create', { 
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${storage.Read("accessToken")}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(UserData) 
+    });
+    if (!res.ok) {
+        throw new Error(`Failed to create user: ${res.status}`);
+    }
+    const data = await res.json();
+    return data;
+}
+
 export default {
     Login:  Login,
+    Create: Create,
     GetByID: GetByID,
     GetAll: GetAll,
     LoginByRefreshToken: LoginByRefreshToken

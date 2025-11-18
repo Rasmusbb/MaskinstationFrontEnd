@@ -2,47 +2,71 @@
     import { page } from '$app/stores';
     import { onMount } from 'svelte';
     import MachineAPI from '$lib/../API/REST/Machine.js';
-    import InfoBox from '$lib/Compontnets/Boxs/InfoBox.svelte';
-    import RoleAPI from '$lib/../API/REST/Rolse.js';
-    let roles = []
-    let selectedRoles = [];    
+    import CreateBox from '../../lib/Compontnets/Boxs/CreateBox.svelte';
+    import RoleAPI from '$lib/../API/REST/Roles.js';
+    import UserAPI from '$lib/../API/REST/User.js';
+    import GalleryAPI from '$lib/../API/REST/Gallery.js'; 
+    let NewUser = {};
+    let fileInput;
     onMount(async () => {
         roles = await RoleAPI.GetAll();
         console.log(roles);
     });
+
+    async function UploadBackground(event) {
+        event.preventDefault();
+        fileInput = fileInput.files[0];
+        if (fileInput) {
+            let ImageData = {
+                ImageFile: fileInput,
+                Tags: ["cb78c0f5-c642-47a2-8f2d-9d2a88f571dd"],
+                GalleryID: "4c67681d-d914-467c-8f9e-52e9181baeb6"
+
+            }
+            GalleryAPI.UploadImage(ImageData);
+        }
+    }
+    async function CreateUser(event) {
+        event.preventDefault();
+        await UserAPI.Create(NewUser);
+    }   
+
 </script>
 
 <h1 class="admin-title">Admin Panel</h1>
+<div class="Wrapper">
+    <CreateBox Title="Create User">
+        <form class="admin-form" on:submit={CreateUser} >
+            <div class="form-group">
+                <label for="Name">Name</label>
+                <input id="Name" type="text" bind:value={NewUser.name}>
+            </div>
 
-<div class="CreateBox">
-    <h2>Create User</h2>
+            <div class="form-group">
+                <label for="Email">Email</label>
+                <input id="Email" type="email" bind:value={NewUser.email}>
+            </div>
 
-    <form class="admin-form">
-        <div class="form-group">
-            <label>Name</label>
-            <input type="text">
-        </div>
-
-        <div class="form-group">
-            <label>Email</label>
-            <input type="email">
-        </div>
-
-        <div class="form-group">
-            <label>Password</label>
-            <input type="password">
-        </div>
-        <div class="form-group">
-            <label>Roles</label>
-            <select bind:value={selectedRoles} multiple>
-                {#each roles as role}
-                    <option value={role.roleID}>{role.roleName}</option>
-                {/each}
-            </select>
-        </div>
+            <div class="form-group">
+                <label for="Password">Password</label>
+                <input id="Password" type="password" bind:value={NewUser.password}>
+            </div>
         <button type="submit" class="btn-submit">Create User</button>
     </form>
+    </CreateBox>
+    <CreateBox Title="Page Settings">
+        <form class="admin-form" on:submit={UploadBackground}>
+            <div class="form-group">
+                <label>Global background</label>
+                <input type="file" accept="image/*" bind:this={fileInput}>
+            </div>
+            <button type="submit" class="btn-submit">UploadBackground</button>
+        </form>
+            
+    </CreateBox>
 </div>
+
+
 
 <style>
 .admin-title {
@@ -51,17 +75,9 @@
     text-align: center;
 }
 
-
-.CreateBox {
-    width: 100%;
-    max-width: 380px; 
-    background: rgba(55, 118, 161, 0.95);
-    border-radius: 14px;
-    margin: 20px auto;
-    padding: 2rem;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    color: white;
-    text-align: left;
+.Wrapper{
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .admin-form {
