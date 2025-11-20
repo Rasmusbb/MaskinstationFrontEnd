@@ -29,6 +29,8 @@
     async function CreateUser(event) {
         event.preventDefault();
         await UserAPI.Create(NewUser);
+        alert("User Created");
+        NewUser = {};
     }   
 
 </script>

@@ -1,5 +1,5 @@
 
-const API = import.meta.env.VITE_API_URL + 'Brand'
+const API = import.meta.env.VITE_API_URL + '/Brand'
 
 export async function GetByID (BrandID) {
   let Data = await fetch(API + '/GetByID?BrandID=' + BrandID,{

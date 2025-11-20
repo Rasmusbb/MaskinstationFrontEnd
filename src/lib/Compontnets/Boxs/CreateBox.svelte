@@ -1,13 +1,11 @@
 <script>
 export let Title = "";
-let selectedRoles = [];
 </script>
 
 <div class="CreateBox" style="CreateBox">
         <h2>{Title}</h2>
         <slot></slot>
 </div>
-
 
 <style>
 .CreateBox {

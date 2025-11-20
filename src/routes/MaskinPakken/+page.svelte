@@ -1,13 +1,13 @@
 <script>
   import BrandAPI from '../../API/REST/Brand.js';
+  import logo from '$lib/assets/Logo.avif';
   import MachineAPI from '../../API/REST/Machine.js';
   import { onMount } from 'svelte';
   import MachineColumn from '$lib/compontnets/columSet/CompColumn.svelte';
   import ColumCard from '$lib/compontnets/columSet/ColumnCard.svelte';
   import Row from '$lib/compontnets/RowSet/CompRow.svelte';
   import RowCard from '$lib/compontnets/RowSet/RowCard.svelte';
-  import Gallery from "../../API/REST/Gallery.js"
-  import Brand from '../../API/REST/Brand.js';
+  import GalleryAPI from "../../API/REST/Gallery.js"
   let Brands = [];
   let Tractors = [];
   let Foragers = [];
@@ -15,10 +15,19 @@
   
   onMount(async () => {
     Brands = await BrandAPI.GetAll();
+    console.log(Brands);  
     Tractors = await MachineAPI.GetByTags(["91592724-05a1-4299-7d9d-08de1b91bb86"])
+    for (let Tractor of Tractors) {
+      Tractor.ProfilPic = GalleryAPI.GetFirstImage(Tractor.galleryID);
+      Tractor.ProfilDefault = logo;
+      Tractor.prefix = "MaskinPakken"
+    }
+
+
+
     BrandIDMap = {};
     for (const brand of Brands) {
-      BrandIDMap[brand.brandID] = {Logo: Gallery.ShowImage(brand.imageID),
+      BrandIDMap[brand.brandID] = {Logo: GalleryAPI.ShowImage(brand.imageID),
         brandName: brand.brandName
       };
     }

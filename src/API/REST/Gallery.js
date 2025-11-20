@@ -46,6 +46,7 @@ export async function GetGalleryByID(GalleryID){
 }
 
 export function GetFirstImage (GalleryID){
+    console.log("Fetching first image from gallery: " + GalleryID)
     let Data = API + '/GetFirstPic?GalleryID=' + GalleryID
     return Data
 }

@@ -15,9 +15,11 @@ import Gallery from "../../../API/REST/Gallery";
     let password = $state('');
     let LoggedIn = $state(false);
     let Admin = $state(false);
+
     function toggleLogin() {
         showLogin = !showLogin;
     }
+    
     function goHome(event) {
       event.preventDefault();
       console.log("Hello2")

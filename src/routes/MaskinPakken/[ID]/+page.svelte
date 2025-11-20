@@ -1,32 +1,36 @@
 <script>
+   
+    import { onMount } from 'svelte'
     import { page } from '$app/stores';
-    import { onMount } from 'svelte';
-    import MachineAPI from '$lib/../API/REST/Machine.js';
-    import Gallery, { ShowImage } from '../../../API/REST/Gallery.js';
-    import GalleryBox from '$lib/Compontnets/Gallery/GalleryBox.svelte';
-    import InfoBox from '$lib/Compontnets/Boxs/InfoBox.svelte';
-    import Brand from '../../../API/REST/Brand';
+    import MachineAPI from '$lib/../API/REST/Machine.js'
+    import Gallery from '../../../API/REST/Gallery.js'
+    import GalleryBox from '$lib/Compontnets/Gallery/GalleryBox.svelte'
+    import InfoBox from '$lib/Compontnets/Boxs/InfoBox.svelte'
+    import Brand from '../../../API/REST/Brand'
     import User from '../../../API/REST/User.js'
-    import { text } from '@sveltejs/kit';
-    let gallery;
-    let brand;
-    let user;
-    let mainImage;
-    let MachineInfo;
-    let UserInfo;
-    let id;
+    import userlogo from '$lib/assets/user.png';
+
+    let gallery
+    let brand
+    let user
+    let mainImage
+    let MachineInfo
+    let UserInfo
+    let id
     $: id = $page.params.ID;
     onMount(async () => {
-        let machine = await MachineAPI.GetByID(id);
-        brand = await Brand.GetByID(machine.brandID);
+        let machine = await MachineAPI.GetByID(id)
+        brand = await Brand.GetByID(machine.brandID)
         gallery = await Gallery.GetGalleryByID(machine.galleryID);
         if(machine.userID != "00000000-0000-0000-0000-000000000000"){
             user = await User.GetByID(machine.userID)
             console.log(user);
             if(user.imageID == "00000000-0000-0000-0000-000000000000"){
-                user.imageID = "a30ec858-2d12-4a0b-8678-08de1d2507a9"
+                user.imageID = "6450c225-67ed-4c41-6c7b-08de2754c6a4"
             }
         }
+        user.ProfilPic = Gallery.GetFirstImageByTag(user.GalleryID, "ProfilPic")
+        user.ProfilDefault = userlogo
         MachineInfo = {
             title : "Maskinoversigt",
             text: brand.brandName  + " " + machine.model,

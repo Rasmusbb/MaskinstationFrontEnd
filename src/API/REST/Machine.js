@@ -1,4 +1,4 @@
-const API = import.meta.env.VITE_API_URL + 'Machine'
+const API = import.meta.env.VITE_API_URL + '/Machine'
 
 
 

@@ -7,7 +7,7 @@
 
 <div class="info-box">
     <h1>{Data.title}</h1>
-    <img src={Gallery.ShowImage(Data.imageID)} alt="" class="info-box-logo">
+    <img src={Gallery.ShowImage(Data.imageID)} alt={Data.ProfilDefault} class="info-box-logo">
     <h2>{Data.text}</h2>
     <p class="description">{Data.description}</p>
     {#if Data.Role}
