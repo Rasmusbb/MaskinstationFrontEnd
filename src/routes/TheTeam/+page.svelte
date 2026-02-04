@@ -6,6 +6,7 @@
   import Gallery from "../../API/REST/Gallery.js"
   import userlogo from '$lib/assets/user.png';
   let users = []; 
+  
   onMount(async () => {
     users = await User.GetAll();
     for (let user of users) {

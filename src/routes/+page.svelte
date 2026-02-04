@@ -7,7 +7,7 @@
 </script>
 
 <video autoplay muted loop playsinline class="bg-video">
-  <source src={Gallery.ShowVideo("d600b8e1-c8bf-4ce5-6788-08de1d64d96f")} type="video/mp4" />
+  <source src={Gallery.ShowVideo("4ad689ed-3c58-484c-55b0-08de64242ae4")} type="video/mp4" />
 </video>
 
 
