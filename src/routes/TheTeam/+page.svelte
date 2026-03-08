@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte';
-  import Column from '$lib/compontnets/columSet/CompColumn.svelte';
-  import ColumCard from '$lib/compontnets/columSet/ColumnCard.svelte';
+  import Column from '$lib/Compontnets/ColumSet/CompColumn.svelte';
+  import ColumCard from '$lib/Compontnets/ColumSet/ColumnCard.svelte';
   import User from '../../API/REST/User.js';
   import Gallery from "../../API/REST/Gallery.js"
   import userlogo from '$lib/assets/user.png';
