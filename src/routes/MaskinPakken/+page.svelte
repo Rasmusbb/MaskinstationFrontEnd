@@ -3,7 +3,7 @@
   import logo from '$lib/assets/Logo.avif';
   import MachineAPI from '../../API/REST/Machine.js';
   import { onMount } from 'svelte';
-  import MachineColumn from '$lib/compontnets/columSet/CompColumn.svelte';
+  import MachineColumn from '$lib/compontnets/ColumSet/CompColumn.svelte';
   import ColumCard from '$lib/compontnets/columSet/ColumnCard.svelte';
   import Row from '$lib/compontnets/RowSet/CompRow.svelte';
   import RowCard from '$lib/compontnets/RowSet/RowCard.svelte';
