@@ -1,5 +1,6 @@
 <script>
 	import Header  from "$lib/Compontnets/header/Header.svelte";
+	import Footer  from "../lib/Compontnets/Footer/Footer.svelte";
 	import favicon from '$lib/assets/Logo.avif';
 
 	let { children } = $props();
@@ -10,6 +11,7 @@
 </svelte:head>
 <Header></Header>
 {@render children()}
+<Footer></Footer>
 
 <style>
 	:global(body) {

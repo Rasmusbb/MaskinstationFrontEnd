@@ -4,8 +4,7 @@
   const items = [
     { id: '', label: 'Hjem', icon: '🏠' },
     { id: '/Stock', label: 'Vare', icon: '📦' },
-    { id: '/Prices', label: 'Priser', icon: '💰' },
-    { id: '/Costumers', label: 'Kunder', icon: '👤' },
+    { id: '/Costumers', label: 'Kunder', icon: '👤' }
     { id: '/Employees', label: 'Medarbejdere', icon: '👨‍🌾'},
     { id: '/Sitesettings', label: 'SiteSettings', icon: '⚙️' },
   ];

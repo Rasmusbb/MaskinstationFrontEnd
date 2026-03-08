@@ -1,4 +1,5 @@
 
+import storage from "../storage";
 const API = import.meta.env.VITE_API_URL + '/Brand'
 
 export async function GetByID (BrandID) {
@@ -35,6 +36,7 @@ async function Create(BrandData) {
 export default {
     GetAll: GetAll,
     GetByID: GetByID,
+    Create: Create
 };
 
 
