@@ -3,10 +3,10 @@
   import logo from '$lib/assets/Logo.avif';
   import MachineAPI from '../../API/REST/Machine.js';
   import { onMount } from 'svelte';
-  import MachineColumn from '$lib/compontnets/ColumSet/CompColumn.svelte';
-  import ColumCard from '$lib/compontnets/columSet/ColumnCard.svelte';
-  import Row from '$lib/compontnets/RowSet/CompRow.svelte';
-  import RowCard from '$lib/compontnets/RowSet/RowCard.svelte';
+  import MachineColumn from '$lib/Compontnets/ColumSet/CompColumn.svelte';
+  import ColumCard from '$lib/Compontnets/ColumSet/ColumnCard.svelte';
+  import Row from '$lib/Compontnets/RowSet/CompRow.svelte';
+  import RowCard from '$lib/Compontnets/RowSet/RowCard.svelte';
   import GalleryAPI from "../../API/REST/Gallery.js"
   let Brands = [];
   let Tractors = [];
