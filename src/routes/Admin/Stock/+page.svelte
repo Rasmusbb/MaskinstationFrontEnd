@@ -6,5 +6,5 @@
 
 <div>
     <VerticalNavBar  active="/Stock"/>'
-    <BoxTabl></BoxTabl>
+    <BoxTable></BoxTable>
 </div>
