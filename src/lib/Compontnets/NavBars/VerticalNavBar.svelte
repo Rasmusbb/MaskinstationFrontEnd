@@ -5,6 +5,7 @@
     { id: '', label: 'Hjem', icon: '🏠' },
     { id: '/Stock', label: 'Vare', icon: '📦' },
     { id: '/Costumers', label: 'Kunder', icon: '👤' },
+    { id: '/Machines', label: 'Maskiner', icon: '🚜' },
     { id: '/Employees', label: 'Medarbejdere', icon: '👨‍🌾'},
     { id: '/Sitesettings', label: 'SiteSettings', icon: '⚙️' },
   ];

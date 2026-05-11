@@ -21,7 +21,7 @@ export function Read(key) {
       if(!JWTVaild(token)){
           let refreshToken = JSON.parse(localStorage.getItem("refreshToken") || null);
           if(refreshToken != null){
-              let newToken = User.LoginByRefreshToken(refreshToken);
+              let newToken = User.LoginByRefreshToken(refreshToken, JSON.parse(localStorage.getItem("userID") || null));
               if(newToken != null){
                   Write("accessToken",newToken.accessToken);
                   Write("refreshToken",newToken.refreshToken);

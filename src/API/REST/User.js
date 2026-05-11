@@ -38,13 +38,13 @@ export async function GetByID (UserID) {
   return Data;
 }
 
-async function LoginByRefreshToken(Token) {
+async function LoginByRefreshToken(Token, User) {
   let Data = await fetch(API + '/Login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(Token) 
+    body: JSON.stringify({ Token, User }) 
   }).then(res => res.json());
   storage.Write('accessToken', Data.accessToken);
   storage.Write('refreshToken', Data.refreshToken);
