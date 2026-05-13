@@ -14,8 +14,7 @@
   let BrandIDMap = {};
   
   onMount(async () => {
-    Brands = await BrandAPI.GetAll();
-    console.log(Brands);  
+    Brands = await BrandAPI.GetAll(); 
     Tractors = await MachineAPI.GetByTags(["91592724-05a1-4299-7d9d-08de1b91bb86"])
     for (let Tractor of Tractors) {
       Tractor.ProfilPic = GalleryAPI.GetFirstImage(Tractor.galleryID);

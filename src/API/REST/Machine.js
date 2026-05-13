@@ -1,4 +1,6 @@
 const API = import.meta.env.VITE_API_URL + '/Machine'
+import storage from "../storage";
+import { CheckToken } from "../MainAPI";
 
 
 
@@ -26,7 +28,6 @@ export async function GetByTags(Tags) {
 }
 
 export async function GetAll(Type) {
-  console.log("Fetching Machines from: " + API + '/GetAll' + "?type=" + Type)
   let Data = await fetch(API + '/GetAll' + "?type=" + Type,{
     method: 'GET',
     headers: {
@@ -38,18 +39,23 @@ export async function GetAll(Type) {
 
 
 async function Create(MachineData) {
+  console.log(await CheckToken());
+  console.log(storage.Read("accessToken"))
+  console.log(MachineData)
   let Data = await fetch(API + '/Create', { 
     method: 'POST',
     headers: {
-      //'Authorization': `Bearer ${storage.Read("accessToken")}`,
+      'Authorization': `Bearer ${storage.Read("accessToken")}`,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(MachineData) 
+    body: JSON.stringify(MachineData)
   }).then(res => res.json());
+  return Data;
 }
 
 export default {
     GetAll: GetAll,
     GetByID: GetByID,
-    GetByTags: GetByTags
+    GetByTags: GetByTags,
+    Create: Create
 };

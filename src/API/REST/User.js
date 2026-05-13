@@ -17,7 +17,6 @@ async function Login(Login) {
 }
 
 export async function GetAll(Type) {
-  console.log("Fetching Users from: " + API + '/GetAll')
   let Data = await fetch(API + '/GetAll',{
     method: 'GET',
     headers: {
@@ -38,16 +37,17 @@ export async function GetByID (UserID) {
   return Data;
 }
 
-async function LoginByRefreshToken(Token, User) {
-  let Data = await fetch(API + '/Login', {
+async function LoginByRefreshToken(TokenData) {
+  let Data = await fetch(API + '/RefreshToken', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ Token, User }) 
+    body: JSON.stringify(TokenData)
   }).then(res => res.json());
   storage.Write('accessToken', Data.accessToken);
   storage.Write('refreshToken', Data.refreshToken);
+  console.log(Data);
   return Data;
 }
 
@@ -57,7 +57,7 @@ async function Create(UserData) {
     const res = await fetch(API + '/Create', { 
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${storage.Read("accessToken")}`,
+            'Authorization': `Bearer ${storage.Read("accessToken").replace(/^"|"$/g, '')}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(UserData) 

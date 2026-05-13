@@ -13,24 +13,8 @@ export function Write(key, initial) {
 export function Read(key) {
     let token = localStorage.getItem(key) || null
       if(token == null) 
-        return null;
-      if(key != "accessToken"){
-          return token;
-      }
-      token = JSON.parse(token) 
-      if(!JWTVaild(token)){
-          let refreshToken = JSON.parse(localStorage.getItem("refreshToken") || null);
-          if(refreshToken != null){
-              let newToken = User.LoginByRefreshToken(refreshToken, JSON.parse(localStorage.getItem("userID") || null));
-              if(newToken != null){
-                  Write("accessToken",newToken.accessToken);
-                  Write("refreshToken",newToken.refreshToken);
-                  return newToken.accessToken;
-              }
-          }
-      }
-    
-    return token
+        return null;    
+    return token.replace(/^"|"$/g, '')
 }
 
 export function DecodeToken(key)
@@ -42,7 +26,7 @@ export function DecodeToken(key)
     return jwtDecode(Read(key));
 }
 
-function JWTVaild(Token){
+export function JWTVaild(Token){
   let now = Math.floor(Date.now() / 1000);
   let decoded = {}
   try{
@@ -60,5 +44,6 @@ function JWTVaild(Token){
 export default {
     Write: Write,
     Read: Read,
-    DecodeToken: DecodeToken
+    DecodeToken: DecodeToken,
+    JWTVaild: JWTVaild
 };

@@ -19,30 +19,30 @@
     let id
     $: id = $page.params.ID;
     onMount(async () => {
+        console.log("Machine ID: " + id)
         let machine = await MachineAPI.GetByID(id)
+        console.log(machine)
         brand = await Brand.GetByID(machine.brandID)
         gallery = await Gallery.GetGalleryByID(machine.galleryID);
         if(machine.userID != "00000000-0000-0000-0000-000000000000"){
             user = await User.GetByID(machine.userID)
-            console.log(user);
             if(user.imageID == "00000000-0000-0000-0000-000000000000"){
                 user.imageID = "6450c225-67ed-4c41-6c7b-08de2754c6a4"
             }
+            user.ProfilPic = Gallery.GetFirstImageByTag(user.GalleryID, "ProfilPic")
+            UserInfo = {
+                title: "Fast chauffør",
+                text: user.name,
+                description: user.email,
+                Role: user.role,
+                imageID: user.imageID
+            }
         }
-        user.ProfilPic = Gallery.GetFirstImageByTag(user.GalleryID, "ProfilPic")
-        user.ProfilDefault = userlogo
         MachineInfo = {
             title : "Maskinoversigt",
             text: brand.brandName  + " " + machine.model,
             description: machine.description,
             imageID: brand.imageID
-        }
-        UserInfo = {
-            title: "Fast chauffør",
-            text: user.name,
-            description: user.email,
-            Role: user.role,
-            imageID: user.imageID
         }
     });
 </script>

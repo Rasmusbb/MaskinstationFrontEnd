@@ -4,15 +4,12 @@ import {goto} from '$app/navigation'
 import HeaderButton from "./headerButton.svelte";
 import logo from '../../assets/Logo.avif';
 import Userpic from '../../assets/user.png';
-import User from '../../../API/REST/User.js';
 import storage from '../../../API/storage.js';
 import LoginModal from '../modal/LoginModal.svelte'
 import Gallery from "../../../API/REST/Gallery";
-
+import {CheckToken} from "../../../API/MainAPI.js";
     let showLogin = $state(false);
     let profilePic = $state(Userpic);
-    let username = $state('');
-    let password = $state('');
     let LoggedIn = $state(false);
     let Admin = $state(false);
 
@@ -26,12 +23,11 @@ import Gallery from "../../../API/REST/Gallery";
       window.location.href = '/'; 
     }
     function checkToken(){
-      let Token = storage.DecodeToken("accessToken")
-      console.log(Token);
-        if (Token != null){
-          LoggedIn = true
-          if(Token.ProfilPic != "00000000-0000-0000-0000-000000000000"){
-            profilePic = Gallery.ShowImage(Token.ProfilPic)
+      let Token = storage.DecodeToken("accessToken") || null;
+      if (Token != null){
+        LoggedIn =  CheckToken();
+        if(Token.ProfilPic != "00000000-0000-0000-0000-000000000000"){
+          profilePic = Gallery.ShowImage(Token.ProfilPic)
           }
           if (Token["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] === "Admin") {
               Admin = true;

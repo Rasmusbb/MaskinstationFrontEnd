@@ -3,7 +3,6 @@
     import { onMount } from 'svelte';
     import MachineAPI from '$lib/../API/REST/Machine.js';
     import BrandAPI from '$lib/../API/REST/Brand.js';
-    import UserAPI from '$lib/../API/REST/User.js';
     import GalleryAPI from '$lib/../API/REST/Gallery.js'; 
     import VerticalNavBar from '$lib/Compontnets/NavBars/VerticalNavBar.svelte';
 
@@ -14,30 +13,19 @@
 
     let showBrandModal = false;
 
-    let machines = [
-        {
-            id: 1,
-            model: "320D",
-            brand: "CAT",
-            description: "Excavator",
-            image: "https://placehold.co/80x80"
-        },
-        {
-            id: 2,
-            model: "T7.300",
-            brand: "New Holland",
-            description: "Tractor",
-            image: "https://placehold.co/80x80"
-        }
-    ];
+    let machines = [];
+    let brandMap = {};
 
     onMount(async () => {
         brands = await BrandAPI.GetAll();
+        machines = await MachineAPI.GetAll();
+        brandMap = Object.fromEntries(
+            brands.map(b => [b.brandID, b.brandName])
+        );
     });
 
     async function AddBrand(event) {
         event.preventDefault();
-
         fileInput = fileInput.files[0];
 
         if (fileInput) {
@@ -68,9 +56,18 @@
 
     async function CreateMachine(event) {
         event.preventDefault();
-        await MachineAPI.Create(NewMachine);
-        alert("Machine Created");
+        console.log(NewMachine);
+        fileInput = fileInput.files[0];
+        let createdmachine = await MachineAPI.Create(NewMachine);
+        let ImageData = {
+            ImageFile: fileInput,
+            Tags: [],
+            GalleryID: createdmachine.galleryID
+            };
+        console.log(ImageData);
+        await GalleryAPI.UploadImage(ImageData);
         NewMachine = {};
+        alert("Machine Created + " + createdmachine.machineID);
     }   
 </script>
 
@@ -100,8 +97,7 @@
 
                 <h2>Create Machine</h2>
 
-                <form class="admin-form">
-
+                <form class="admin-form"    on:submit={CreateMachine}>
                     <div class="form-group">
                         <label>Model</label>
                         <input type="text" bind:value={NewMachine.model}>
@@ -110,7 +106,7 @@
                     <div class="form-group">
                         <label>Brand</label>
 
-                        <select bind:value={NewMachine.brand}>
+                        <select bind:value={NewMachine.brandID}>
                             <option disabled selected value="">
                                 Select brand
                             </option>
@@ -130,7 +126,9 @@
 
                     <div class="form-group">
                         <label>Picture</label>
-                        <input type="file">
+
+                    <input type="file" accept="image/*"bind:this={fileInput}
+                    >
                     </div>
 
                     <button type="submit" class="submit-btn">
@@ -172,7 +170,7 @@
                                 </td>
 
                                 <td>{machine.model}</td>
-                                <td>{machine.brand}</td>
+                                <td>{brandMap[machine.brandID]}</td>
                                 <td>{machine.description}</td>
 
                             </tr>
@@ -233,7 +231,6 @@
                 type="submit"
                 class="submit-btn"
             >
-                Create Brand
             </button>
 
         </form>

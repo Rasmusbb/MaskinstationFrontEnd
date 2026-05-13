@@ -11,11 +11,15 @@ export function ShowVideo (ImageID){
 }
 async function UploadImage(ImageData) {
     console.log(ImageData);
-    let url = API + '/AddImageToGallery?Tags=';
-    for (let i = 0; i < ImageData.Tags.length; i++) {
-        url += ImageData.Tags[i];
-        if (i < ImageData.Tags.length - 1) {
-            url += ',';
+    let url = API + '/AddImageToGallery?';
+    if (ImageData.Tags != null && ImageData.Tags.length > 0)
+    {
+        url += 'TagIDs=';
+        for (let i = 0; i < ImageData.Tags.length; i++) {
+            url += ImageData.Tags[i];
+            if (i < ImageData.Tags.length - 1) {
+                url += ',';
+            }
         }
     }
     url += '&GalleryID=' + ImageData.GalleryID;

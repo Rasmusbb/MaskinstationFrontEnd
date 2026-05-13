@@ -17,7 +17,7 @@
 	:global(body) {
 		margin: 0;
 		height: 100%;
-		background-image: url(http://165.22.87.11:7006/api/Gallery/GetFirstPicByTag?GalleryID=4c67681d-d914-467c-8f9e-52e9181baeb6&TagName=Background);
+		background-image: url(http://localhost:5115/api/Gallery/GetFirstPicByTag?GalleryID=4c67681d-d914-467c-8f9e-52e9181baeb6&TagName=Background);
 		background-size: cover;
 		background-position: center;
 		background-attachment: fixed; 
